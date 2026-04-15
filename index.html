@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>In-Class Activity: [ACTIVITY NAME] — [COURSE NUMBER]</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- PROGRESS BAR — sticky, always at very top -->
+  <div class="progress-sticky">
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-inner">
+        <span class="progress-label">Progress</span>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span class="progress-pct" id="progressPct">0%</span>
+      </div>
+      <div class="progress-parts">
+        <span class="part-dot" id="dot-p1">Part 1</span>
+        <span class="part-dot" id="dot-p2">Part 2</span>
+        <span class="part-dot" id="dot-p3">Part 3</span>
+        <span class="part-dot" id="dot-p4">Part 4</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-school">
+        <div>
+          <div class="course-label">[COURSE NUMBER]: [COURSE NAME]</div>
+          <div class="course-sublabel">San José State University</div>
+        </div>
+      </div>
+      <div class="header-title">
+        <h1>In-Class Activity: [ACTIVITY NAME]</h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-main">
+
+    <div class="save-notice" id="saveNotice" aria-live="polite"></div>
+
+    <!-- STUDENT INFO -->
+    <section class="card" id="sec-info">
+      <div class="card-header info-header">
+        <span class="card-icon">✎</span>
+        <h2>Your Information</h2>
+      </div>
+      <div class="card-body">
+        <p class="card-intro">Enter your name and email below.</p>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="studentName">Full Name <span class="req">*</span></label>
+            <input type="text" id="studentName" name="studentName" placeholder="First Last" autocomplete="name" />
+          </div>
+          <div class="field-group">
+            <label for="studentEmail">SJSU Email <span class="req">*</span></label>
+            <input type="email" id="studentEmail" name="studentEmail" placeholder="you@sjsu.edu" autocomplete="email" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OVERVIEW -->
+    <section class="card overview-card">
+      <div class="card-header overview-header">
+        <h2>Overview</h2>
+      </div>
+      <div class="card-body">
+        <p>[Replace this paragraph with a brief description of why this topic matters and what real-world consequences students should understand. Keep it 2–3 sentences.]</p>
+        <p><strong>In this activity, you will:</strong></p>
+        <ol>
+          <li>[Describe Part 1 — what students will read or examine]</li>
+          <li>[Describe Part 2 — what students will diagnose or identify]</li>
+          <li>[Describe Part 3 — what students will rewrite or create]</li>
+          <li>[Describe Part 4 — what students will reflect on]</li>
+        </ol>
+        <p class="reminder-text"><em>[Optional: Add a key reminder or framing statement here. This appears as a highlighted callout.]</em></p>
+
+        <h3 class="sub-heading">[Reference List Heading — e.g., "Core Sections of a Campaign Brief"]</h3>
+        <ol class="brief-sections-list">
+          <li><strong>[Section 1 Name]:</strong> <em>[Description of what this section includes and what students should look for]</em></li>
+          <li><strong>[Section 2 Name]:</strong> <em>[Description of what this section includes and what students should look for]</em></li>
+          <li><strong>[Section 3 Name]:</strong> <em>[Description of what this section includes and what students should look for]</em></li>
+          <li><strong>[Section 4 Name]:</strong> <em>[Description of what this section includes and what students should look for]</em></li>
+          <li><strong>[Section 5 Name]:</strong> <em>[Description of what this section includes and what students should look for]</em></li>
+          <li><strong>[Section 6 Name]:</strong> <em>[Description of what this section includes and what students should look for]</em></li>
+          <li><strong>[Section 7 Name]:</strong> <em>[Description of what this section includes and what students should look for]</em></li>
+          <li><strong>[Section 8 Name]:</strong> <em>[Description of what this section includes and what students should look for]</em></li>
+          <li><strong>[Section 9 Name]:</strong> <em>[Description of what this section includes and what students should look for]</em></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- PART 1: READ THE DOCUMENT -->
+    <section class="card part-card" id="sec-p1">
+      <div class="card-header part1-header">
+        <span class="part-badge">Part 1</span>
+        <h2>[Part 1 Title — e.g., "Read the Brief"]</h2>
+      </div>
+      <div class="card-body">
+        <p class="card-intro">[Part 1 instructions — e.g., "Read the document below. Use the annotation tools to highlight, underline, or flag anything that seems problematic."]</p>
+
+        <div class="ann-legend">
+          <span class="ann-legend-title">Select any text to annotate:</span>
+          <span class="ann-chip ann-chip-highlight">Highlight</span>
+          <span class="ann-chip ann-chip-underline">Underline</span>
+          <span class="ann-chip ann-chip-flag">Flag</span>
+          <button class="ann-clear-btn" id="btnClearAnnotations">Clear annotations</button>
+        </div>
+
+        <div class="neutrogena-brief" id="briefContent">
+          <div class="brief-title-bar">
+            <span>[DOCUMENT TITLE] (as received)</span>
+          </div>
+          <div class="brief-meta">
+            <p><strong>[META LABEL 1 — e.g., "CLIENT"]:</strong> [Value — e.g., "Brand Name"]</p>
+            <p><strong>[META LABEL 2 — e.g., "CAMPAIGN"]:</strong> [Value — e.g., "Campaign Name"]</p>
+          </div>
+          <div class="brief-divider"></div>
+
+          <div class="brief-section" id="bs-section1">
+            <h4 class="brief-section-label">[SECTION 1 NAME]</h4>
+            <p>[Paste the flawed content for Section 1 here. This is the document students read in Part 1 and diagnose in Part 2.]</p>
+          </div>
+
+          <div class="brief-section" id="bs-section2">
+            <h4 class="brief-section-label">[SECTION 2 NAME]</h4>
+            <p>[Paste the flawed content for Section 2 here.]</p>
+          </div>
+
+          <div class="brief-section" id="bs-section3">
+            <h4 class="brief-section-label">[SECTION 3 NAME]</h4>
+            <p>[Paste the flawed content for Section 3 here.]</p>
+          </div>
+
+          <div class="brief-section" id="bs-section4">
+            <h4 class="brief-section-label">[SECTION 4 NAME]</h4>
+            <p>[Paste the flawed content for Section 4 here.]</p>
+          </div>
+
+          <div class="brief-section" id="bs-section5">
+            <h4 class="brief-section-label">[SECTION 5 NAME]</h4>
+            <p>[Paste the flawed content for Section 5 here.]</p>
+          </div>
+
+          <div class="brief-section" id="bs-section6">
+            <h4 class="brief-section-label">[SECTION 6 NAME]</h4>
+            <p>[Paste the flawed content for Section 6 here.]</p>
+          </div>
+
+          <div class="brief-section" id="bs-section7">
+            <h4 class="brief-section-label">[SECTION 7 NAME]</h4>
+            <p>[Paste the flawed content for Section 7 here.]</p>
+          </div>
+
+          <div class="brief-section" id="bs-section8">
+            <h4 class="brief-section-label">[SECTION 8 NAME]</h4>
+            <p>[Paste the flawed content for Section 8 here.]</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="part-footer">
+        <p class="continue-msg" id="msg-p1"></p>
+        <button class="btn-continue" id="btn-continue-p1">Continue to Part 2</button>
+      </div>
+    </section>
+
+    <!-- PART 2: DIAGNOSE THE PROBLEMS -->
+    <section class="card part-card part-locked" id="sec-p2">
+      <div class="card-header part2-header">
+        <span class="part-badge">Part 2</span>
+        <h2>[Part 2 Title — e.g., "Fix the Problems"]</h2>
+      </div>
+      <div class="card-body">
+        <p class="card-intro">[Part 2 instructions — e.g., "For each section of the document, identify what is wrong and explain why it matters. Use specific concepts from class."]</p>
+
+        <div class="p2-items">
+
+          <div class="p2-item">
+            <div class="p2-item-header">[Section 1 Name]</div>
+            <div class="brief-ref" id="ref-section1" data-source="bs-section1"></div>
+            <div class="p2-cols">
+              <div class="p2-col">
+                <label class="p2-col-label">[Left Column Question — e.g., "What is wrong with it?"]</label>
+                <textarea id="p2_section1_wrong" name="p2_section1_wrong" placeholder="[Left column placeholder text]"></textarea>
+              </div>
+              <div class="p2-col">
+                <label class="p2-col-label">[Right Column Question — e.g., "Why does it matter?"]</label>
+                <textarea id="p2_section1_why" name="p2_section1_why" placeholder="[Right column placeholder text]"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="p2-item">
+            <div class="p2-item-header">[Section 2 Name]</div>
+            <div class="brief-ref" id="ref-section2" data-source="bs-section2"></div>
+            <div class="p2-cols">
+              <div class="p2-col">
+                <label class="p2-col-label">[Left Column Question]</label>
+                <textarea id="p2_section2_wrong" name="p2_section2_wrong" placeholder="[Left column placeholder text]"></textarea>
+              </div>
+              <div class="p2-col">
+                <label class="p2-col-label">[Right Column Question]</label>
+                <textarea id="p2_section2_why" name="p2_section2_why" placeholder="[Right column placeholder text]"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="p2-item">
+            <div class="p2-item-header">[Section 3 Name]</div>
+            <div class="brief-ref" id="ref-section3" data-source="bs-section3"></div>
+            <div class="p2-cols">
+              <div class="p2-col">
+                <label class="p2-col-label">[Left Column Question]</label>
+                <textarea id="p2_section3_wrong" name="p2_section3_wrong" placeholder="[Left column placeholder text]"></textarea>
+              </div>
+              <div class="p2-col">
+                <label class="p2-col-label">[Right Column Question]</label>
+                <textarea id="p2_section3_why" name="p2_section3_why" placeholder="[Right column placeholder text]"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="p2-item">
+            <div class="p2-item-header">[Section 4 Name]</div>
+            <div class="brief-ref" id="ref-section4" data-source="bs-section4"></div>
+            <div class="p2-cols">
+              <div class="p2-col">
+                <label class="p2-col-label">[Left Column Question]</label>
+                <textarea id="p2_section4_wrong" name="p2_section4_wrong" placeholder="[Left column placeholder text]"></textarea>
+              </div>
+              <div class="p2-col">
+                <label class="p2-col-label">[Right Column Question]</label>
+                <textarea id="p2_section4_why" name="p2_section4_why" placeholder="[Right column placeholder text]"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="p2-item">
+            <div class="p2-item-header">[Section 5 Name]</div>
+            <div class="brief-ref" id="ref-section5" data-source="bs-section5"></div>
+            <div class="p2-cols">
+              <div class="p2-col">
+                <label class="p2-col-label">[Left Column Question]</label>
+                <textarea id="p2_section5_wrong" name="p2_section5_wrong" placeholder="[Left column placeholder text]"></textarea>
+              </div>
+              <div class="p2-col">
+                <label class="p2-col-label">[Right Column Question]</label>
+                <textarea id="p2_section5_why" name="p2_section5_why" placeholder="[Right column placeholder text]"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="p2-item">
+            <div class="p2-item-header">[Section 6 Name]</div>
+            <div class="brief-ref" id="ref-section6" data-source="bs-section6"></div>
+            <div class="p2-cols">
+              <div class="p2-col">
+                <label class="p2-col-label">[Left Column Question]</label>
+                <textarea id="p2_section6_wrong" name="p2_section6_wrong" placeholder="[Left column placeholder text]"></textarea>
+              </div>
+              <div class="p2-col">
+                <label class="p2-col-label">[Right Column Question]</label>
+                <textarea id="p2_section6_why" name="p2_section6_why" placeholder="[Right column placeholder text]"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="p2-item">
+            <div class="p2-item-header">[Section 7 Name]</div>
+            <div class="brief-ref" id="ref-section7" data-source="bs-section7"></div>
+            <div class="p2-cols">
+              <div class="p2-col">
+                <label class="p2-col-label">[Left Column Question]</label>
+                <textarea id="p2_section7_wrong" name="p2_section7_wrong" placeholder="[Left column placeholder text]"></textarea>
+              </div>
+              <div class="p2-col">
+                <label class="p2-col-label">[Right Column Question]</label>
+                <textarea id="p2_section7_why" name="p2_section7_why" placeholder="[Right column placeholder text]"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="p2-item">
+            <div class="p2-item-header">[Section 8 Name]</div>
+            <div class="brief-ref" id="ref-section8" data-source="bs-section8"></div>
+            <div class="p2-cols">
+              <div class="p2-col">
+                <label class="p2-col-label">[Left Column Question]</label>
+                <textarea id="p2_section8_wrong" name="p2_section8_wrong" placeholder="[Left column placeholder text]"></textarea>
+              </div>
+              <div class="p2-col">
+                <label class="p2-col-label">[Right Column Question]</label>
+                <textarea id="p2_section8_why" name="p2_section8_why" placeholder="[Right column placeholder text]"></textarea>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="part-footer">
+        <p class="continue-msg" id="msg-p2"></p>
+        <button class="btn-continue" id="btn-continue-p2">Continue to Part 3</button>
+      </div>
+    </section>
+
+    <!-- PART 3: REWRITE / CREATE -->
+    <section class="card part-card part-locked" id="sec-p3">
+      <div class="card-header part3-header">
+        <span class="part-badge">Part 3</span>
+        <h2>[Part 3 Title — e.g., "Rewrite the Brief"]</h2>
+      </div>
+      <div class="card-body">
+        <p class="card-intro">[Part 3 instructions — e.g., "Using the 9 core sections from class, rewrite this brief correctly. Be specific, professional, and realistic."]</p>
+
+        <div class="brief-context-box">
+          <strong>[Context Label 1 — e.g., "Brand"]:</strong> [Value] &nbsp;|&nbsp;
+          <strong>[Context Label 2 — e.g., "Campaign"]:</strong> [Value] &nbsp;|&nbsp;
+          <strong>[Context Label 3 — e.g., "Platform(s)"]:</strong> [Value]
+        </div>
+
+        <div class="rewrite-sections">
+
+          <div class="rewrite-item">
+            <div class="rewrite-label">1. [Section 1 Name]</div>
+            <textarea id="p3_1" name="p3_1" placeholder="[Prompt for Section 1 — e.g., 'What is the campaign? What is being promoted? Why now?']"></textarea>
+          </div>
+
+          <div class="rewrite-item">
+            <div class="rewrite-label">2. [Section 2 Name]</div>
+            <textarea id="p3_2" name="p3_2" placeholder="[Prompt for Section 2]"></textarea>
+          </div>
+
+          <div class="rewrite-item">
+            <div class="rewrite-label">3. [Section 3 Name]</div>
+            <textarea id="p3_3" name="p3_3" placeholder="[Prompt for Section 3]"></textarea>
+          </div>
+
+          <div class="rewrite-item">
+            <div class="rewrite-label">4. [Section 4 Name]</div>
+            <textarea id="p3_4" name="p3_4" placeholder="[Prompt for Section 4]"></textarea>
+          </div>
+
+          <div class="rewrite-item">
+            <div class="rewrite-label">5. [Section 5 Name]</div>
+            <textarea id="p3_5" name="p3_5" placeholder="[Prompt for Section 5]"></textarea>
+          </div>
+
+          <div class="rewrite-item">
+            <div class="rewrite-label">6. [Section 6 Name]</div>
+            <textarea id="p3_6" name="p3_6" placeholder="[Prompt for Section 6]"></textarea>
+          </div>
+
+          <div class="rewrite-item">
+            <div class="rewrite-label">7. [Section 7 Name]</div>
+            <textarea id="p3_7" name="p3_7" placeholder="[Prompt for Section 7]"></textarea>
+          </div>
+
+          <div class="rewrite-item">
+            <div class="rewrite-label">8. [Section 8 Name]</div>
+            <textarea id="p3_8" name="p3_8" placeholder="[Prompt for Section 8]"></textarea>
+          </div>
+
+          <div class="rewrite-item">
+            <div class="rewrite-label">9. [Section 9 Name]</div>
+            <textarea id="p3_9" name="p3_9" placeholder="[Prompt for Section 9]"></textarea>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="part-footer">
+        <p class="continue-msg" id="msg-p3"></p>
+        <button class="btn-continue" id="btn-continue-p3">Continue to Part 4</button>
+      </div>
+    </section>
+
+    <!-- PART 4: REFLECTION -->
+    <section class="card part-card part-locked" id="sec-p4">
+      <div class="card-header part4-header">
+        <span class="part-badge">Part 4</span>
+        <h2>Reflection Questions</h2>
+      </div>
+      <div class="card-body">
+        <p class="card-intro">Answer the following in complete sentences.</p>
+
+        <div class="reflection-item">
+          <div class="reflection-q">
+            <span class="q-num">1.</span>
+            [Reflection Question 1 — Replace with your specific question]
+          </div>
+          <textarea id="p4_1" name="p4_1" placeholder="Answer in complete sentences..."></textarea>
+        </div>
+
+        <div class="reflection-item">
+          <div class="reflection-q">
+            <span class="q-num">2.</span>
+            [Reflection Question 2 — Replace with your specific question]
+          </div>
+          <textarea id="p4_2" name="p4_2" placeholder="Answer in complete sentences..."></textarea>
+        </div>
+
+        <div class="reflection-item">
+          <div class="reflection-q">
+            <span class="q-num">3.</span>
+            [Reflection Question 3 — Replace with your specific question]
+          </div>
+          <textarea id="p4_3" name="p4_3" placeholder="Answer in complete sentences..."></textarea>
+        </div>
+
+        <div class="reflection-item">
+          <div class="reflection-q">
+            <span class="q-num">4.</span>
+            [Reflection Question 4 — Replace with your specific question]
+          </div>
+          <textarea id="p4_4" name="p4_4" placeholder="Answer in complete sentences..."></textarea>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- DOWNLOAD & SUBMIT -->
+    <section class="submit-section part-locked" id="sec-submit">
+      <div class="submit-inner">
+        <div class="submit-icon">⬇</div>
+        <h2>Download PDF</h2>
+        <p>When you're finished, click the button below to download a PDF of your completed worksheet. Then <strong>upload the PDF to the [ACTIVITY NAME] assignment on Canvas</strong>.</p>
+
+        <button class="btn-download" id="btnDownload">
+          Download My Worksheet (PDF)
+        </button>
+
+        <div class="btn-clear-wrap">
+          <button class="btn-clear" id="btnClear">Clear &amp; Start Over</button>
+        </div>
+
+        <div class="validation-msg" id="validationMsg"></div>
+
+        <div class="submit-save-note">
+          <p><strong>Your progress is saved automatically in your browser. You can return to finish later, even if you close this tab.</strong></p>
+          <p class="submit-warning">This has not been fully tested. Do not trust that this will save your work. Keep the browser tab open just to be safe.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>[COURSE NUMBER]: [COURSE NAME] | San José State University</p>
+  </footer>
+
+  <!-- Annotation toolbar -->
+  <div class="ann-toolbar" id="annToolbar" role="toolbar" aria-label="Annotation tools">
+    <button class="ann-btn" data-type="highlight" title="Highlight">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="1" y="9" width="14" height="5" rx="1.5" fill="#F6C90E"/><rect x="4" y="2" width="8" height="9" rx="1" fill="currentColor" opacity=".7"/></svg>
+      Highlight
+    </button>
+    <div class="ann-toolbar-sep"></div>
+    <button class="ann-btn" data-type="underline" title="Underline">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><text x="2" y="12" font-size="13" font-weight="bold" font-family="serif" fill="currentColor">U</text><rect x="1" y="13.5" width="14" height="1.5" rx="1" fill="currentColor"/></svg>
+      Underline
+    </button>
+    <div class="ann-toolbar-sep"></div>
+    <button class="ann-btn" data-type="flag" title="Flag">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 1v14M3 1h9l-2.5 4L12 9H3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Flag
+    </button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
