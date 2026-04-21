@@ -3,6 +3,10 @@
 //  Real-time collaboration via Supabase
 // ═══════════════════════════════════════════════════════════════
 
+// ── GOOGLE SHEETS WEBHOOK ────────────────────────────────────────
+// Paste your deployed Apps Script Web App URL here after setup
+const SHEETS_WEBHOOK_URL = '';
+
 // ── SUPABASE CONFIG ─────────────────────────────────────────────
 const SUPABASE_URL = 'https://tfltgoufgimhhkeuvtgp.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRmbHRnb3VmZ2ltaGhrZXV2dGdwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxMjg2MDYsImV4cCI6MjA5MTcwNDYwNn0.mzLjt1gE00oDeUBMpny8TVYMRa0gFUrGaMaJrBO_hr4';
@@ -483,6 +487,46 @@ function clearForm() {
   showSaveNotice();
 }
 
+// ── GOOGLE SHEETS SUBMISSION ─────────────────────────────────────
+async function submitToGoogleSheets(memberNames) {
+  if (!SHEETS_WEBHOOK_URL) return;
+
+  const payload = {
+    submittedAt:           new Date().toLocaleString('en-US', {
+      weekday: 'long', month: 'long', day: 'numeric', year: 'numeric',
+      hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true,
+    }),
+    groupCode:             groupCode,
+    members:               memberNames,
+    p1_core_issue:         document.getElementById('p1_core_issue')?.value.trim()         || '',
+    p1_factors_checks:     document.getElementById('p1_factors_checks')?.value.trim()     || '',
+    p1_factors_explanation:document.getElementById('p1_factors_explanation')?.value.trim()|| '',
+    p2_breakdown_point:    document.getElementById('p2_breakdown_point')?.value.trim()    || '',
+    p2_red_flags:          document.getElementById('p2_red_flags')?.value.trim()          || '',
+    p2_responsibility:     document.getElementById('p2_responsibility')?.value.trim()     || '',
+    p3_reputation:         document.getElementById('p3_reputation')?.value.trim()         || '',
+    p3_audience:           document.getElementById('p3_audience')?.value.trim()           || '',
+    p3_pr_issue:           document.getElementById('p3_pr_issue')?.value.trim()           || '',
+    p4_immediate:          document.getElementById('p4_immediate')?.value.trim()          || '',
+    p4_communication:      document.getElementById('p4_communication')?.value.trim()      || '',
+    p4_prevention:         document.getElementById('p4_prevention')?.value.trim()         || '',
+    p4_relationship:       document.getElementById('p4_relationship')?.value.trim()       || '',
+    p5_takeaway:           document.getElementById('p5_takeaway')?.value.trim()           || '',
+    p5_opinion:            document.getElementById('p5_opinion')?.value.trim()            || '',
+  };
+
+  try {
+    await fetch(SHEETS_WEBHOOK_URL, {
+      method:  'POST',
+      mode:    'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body:    JSON.stringify(payload),
+    });
+  } catch (err) {
+    console.warn('Sheets submission failed (non-blocking):', err);
+  }
+}
+
 // ── PDF GENERATION ────────────────────────────────────────────────
 async function generatePDF() {
   const { jsPDF } = window.jspdf;
@@ -784,9 +828,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Download PDF
-  document.getElementById('btnDownload')?.addEventListener('click', () => {
+  // Download PDF + submit to Google Sheets
+  document.getElementById('btnDownload')?.addEventListener('click', async () => {
     if (!validate()) return;
+
+    // Resolve member names (same logic as generatePDF uses)
+    let memberNames = myName;
+    if (groupCode && sb) {
+      const { data } = await sb
+        .from('pr190_members')
+        .select('member_name')
+        .eq('group_code', groupCode);
+      if (data?.length) {
+        memberNames = [...new Set(data.map(r => r.member_name))].join(', ');
+      }
+    }
+
+    // Fire Sheets submission and PDF generation in parallel
+    submitToGoogleSheets(memberNames);
     generatePDF();
   });
 
