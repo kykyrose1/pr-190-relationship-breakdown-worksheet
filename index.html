@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>In-Class Activity: [ACTIVITY NAME] — [COURSE NUMBER]</title>
+  <title>Relationship Breakdown Case Analysis — PR 190</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- PROGRESS BAR — sticky, always at very top -->
+  <!-- PROGRESS BAR -->
   <div class="progress-sticky">
     <div class="progress-bar-wrap">
       <div class="progress-bar-inner">
@@ -23,7 +23,13 @@
         <span class="part-dot" id="dot-p2">Part 2</span>
         <span class="part-dot" id="dot-p3">Part 3</span>
         <span class="part-dot" id="dot-p4">Part 4</span>
+        <span class="part-dot" id="dot-p5">Part 5</span>
       </div>
+    </div>
+    <!-- Online members (appears after joining) -->
+    <div class="member-bar-wrap" id="memberBarWrap" style="display:none">
+      <span class="member-bar-label">In this session:</span>
+      <div class="member-bar" id="memberBar"></div>
     </div>
   </div>
 
@@ -32,413 +38,350 @@
     <div class="header-inner">
       <div class="header-school">
         <div>
-          <div class="course-label">[COURSE NUMBER]: [COURSE NAME]</div>
+          <div class="course-label">PR 190: Media &amp; Influencer Relations</div>
           <div class="course-sublabel">San José State University</div>
         </div>
       </div>
       <div class="header-title">
-        <h1>In-Class Activity: [ACTIVITY NAME]</h1>
+        <h1>Relationship Breakdown Case Analysis</h1>
       </div>
     </div>
   </header>
 
   <main class="page-main">
 
+    <nav class="sidebar-nav" id="sidebarNav">
+      <div class="sidebar-title">Contents</div>
+      <a href="#sec-info"     data-target="sec-info">Join Group</a>
+      <a href="#sec-overview" data-target="sec-overview">Overview</a>
+      <a href="#sec-scenario" data-target="sec-scenario">Scenario</a>
+      <a href="#sec-p1"       data-target="sec-p1">Part 1: Scenario Analysis</a>
+      <a href="#sec-p2"       data-target="sec-p2">Part 2: Breakdown Point</a>
+      <a href="#sec-p3"       data-target="sec-p3">Part 3: PR Impact</a>
+      <a href="#sec-p4"       data-target="sec-p4">Part 4: Fix Strategy</a>
+      <a href="#sec-p5"       data-target="sec-p5">Part 5: Reflection</a>
+      <a href="#sec-submit"   data-target="sec-submit">Download PDF</a>
+    </nav>
+
     <div class="save-notice" id="saveNotice" aria-live="polite"></div>
 
-    <!-- STUDENT INFO -->
-    <section class="card" id="sec-info">
+    <!-- Hidden field used by PDF generator -->
+    <input type="hidden" id="studentName" />
+
+    <!-- ── JOIN CARD ──────────────────────────────────────────────── -->
+    <section class="card join-card" id="sec-info">
       <div class="card-header info-header">
-        <span class="card-icon">✎</span>
-        <h2>Your Information</h2>
+        <h2>Join Your Group Session</h2>
       </div>
       <div class="card-body">
-        <p class="card-intro">Enter your name and email below.</p>
+        <p class="card-intro">Every member opens this page and enters the same group code. Edits sync live across all members in real time. Submit <strong>one PDF per group</strong>.</p>
         <div class="field-row">
           <div class="field-group">
-            <label for="studentName">Full Name <span class="req">*</span></label>
-            <input type="text" id="studentName" name="studentName" placeholder="First Last" autocomplete="name" />
+            <label for="nameInput">Your Name <span class="req">*</span></label>
+            <input type="text" id="nameInput" placeholder="First Last" autocomplete="name" />
           </div>
           <div class="field-group">
-            <label for="studentEmail">SJSU Email <span class="req">*</span></label>
-            <input type="email" id="studentEmail" name="studentEmail" placeholder="you@sjsu.edu" autocomplete="email" />
+            <label for="groupCodeInput">Group Code <span class="req">*</span></label>
+            <div class="code-input-row">
+              <input type="text" id="groupCodeInput" placeholder="e.g. XK4P2M"
+                     maxlength="8" spellcheck="false" autocomplete="off"
+                     style="text-transform:uppercase; letter-spacing:0.12em; font-weight:700;" />
+              <button class="btn-generate" id="btnGenerate" type="button">Generate</button>
+            </div>
           </div>
+        </div>
+        <div class="join-actions">
+          <button class="btn-join" id="btnJoin" type="button">Join Session →</button>
+          <p class="join-hint">First in your group? Click <strong>Generate</strong> to create a code, then share it with teammates.</p>
+        </div>
+        <div class="join-status" id="joinStatus"></div>
+      </div>
+    </section>
+
+    <!-- ── OVERVIEW ───────────────────────────────────────────────── -->
+    <section class="card overview-card" id="sec-overview">
+      <div class="card-header overview-header">
+        <h2>Activity Overview</h2>
+      </div>
+      <div class="card-body">
+        <p>Influencer partnerships do not fail because of one single mistake. They fail because of <strong>accumulated breakdowns</strong> in communication, expectations, and trust.</p>
+        <p>In this activity, you will analyze a realistic influencer-brand partnership scenario and evaluate what went wrong, where the relationship broke down, how the situation could escalate into a PR issue, and how the brand should respond and prevent future issues.</p>
+        <p class="reminder-text"><em>This is a PR analysis exercise — focus on reputation, trust, and communication, not just marketing performance.</em></p>
+
+        <h3 class="sub-heading">Learning Objectives</h3>
+        <ul class="overview-parts-list">
+          <li>Apply relationship management concepts to real-world scenarios</li>
+          <li>Identify early warning signs of partnership failure</li>
+          <li>Evaluate how operational issues can escalate into reputational damage</li>
+          <li>Propose strategic, PR-informed solutions</li>
+        </ul>
+
+        <h3 class="sub-heading">Instructions</h3>
+        <ul class="overview-parts-list">
+          <li>Work individually or in groups of 2–3</li>
+          <li>Read the scenario carefully before answering</li>
+          <li>Answer all questions in complete sentences</li>
+          <li>Be specific and use course concepts where applicable</li>
+          <li>One PDF download per group — all questions are visible from the start</li>
+        </ul>
+
+        <h3 class="sub-heading">Unit 5: Relationship Management, Risk &amp; Crisis — Week 14 Activity</h3>
+        <ol class="brief-sections-list">
+          <li><strong>Part 1 — Scenario Analysis:</strong> <em>Identify the core issue and contributing factors in the partnership breakdown</em></li>
+          <li><strong>Part 2 — Breakdown Point:</strong> <em>Pinpoint where and why the relationship failed, including early warning signs</em></li>
+          <li><strong>Part 3 — PR Impact:</strong> <em>Analyze how the situation affects brand reputation, audience perception, and PR standing</em></li>
+          <li><strong>Part 4 — Fix Strategy:</strong> <em>Propose immediate crisis response actions and long-term prevention strategies</em></li>
+          <li><strong>Part 5 — Reflection:</strong> <em>Draw broader lessons about influencer relations and the role of trust versus control</em></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ── SCENARIO ───────────────────────────────────────────────── -->
+    <section class="card" id="sec-scenario">
+      <div class="card-header" style="background:var(--navy);">
+        <h2>Scenario: Influencer Partnership Breakdown</h2>
+      </div>
+      <div class="card-body">
+        <p style="color:var(--text-md); margin-bottom:16px;">A skincare brand partners with a mid-tier beauty influencer for a paid TikTok and Instagram campaign.</p>
+
+        <div class="scenario-block">
+          <div class="scenario-section-label">The Agreement Includes</div>
+          <ul class="reminder-list">
+            <li>2 TikTok videos</li>
+            <li>1 Instagram Reel</li>
+            <li>Posting within a 2-week timeframe</li>
+          </ul>
+        </div>
+
+        <div class="scenario-block">
+          <div class="scenario-section-label">What Happens</div>
+          <ol class="scenario-list">
+            <li>The brand sends a <strong>vague brief</strong> with minimal creative direction</li>
+            <li>The influencer submits the first draft <strong>on time</strong></li>
+            <li>The brand responds <strong>5 days later</strong> with extensive revision requests:
+              <ul class="reminder-list" style="margin-top:6px; margin-bottom:0;">
+                <li>Changing the tone of the video</li>
+                <li>Adding scripted language</li>
+                <li>Refilming multiple scenes</li>
+              </ul>
+            </li>
+            <li>The influencer pushes back — the changes feel <em>inauthentic</em> to their audience</li>
+            <li>The brand insists on revisions and continues to delay approval</li>
+            <li>The <strong>posting deadline passes</strong></li>
+            <li>The influencer posts on Instagram Stories: <em>"Brands need to respect creators' voices. Not everything needs to sound like an ad."</em></li>
+            <li>Followers begin speculating about the brand</li>
+            <li>Comments appear questioning the brand's professionalism</li>
+          </ol>
         </div>
       </div>
     </section>
 
-    <!-- OVERVIEW -->
-    <section class="card overview-card">
-      <div class="card-header overview-header">
-        <h2>Overview</h2>
-      </div>
-      <div class="card-body">
-        <p>[Replace this paragraph with a brief description of why this topic matters and what real-world consequences students should understand. Keep it 2–3 sentences.]</p>
-        <p><strong>In this activity, you will:</strong></p>
-        <ol>
-          <li>[Describe Part 1 — what students will read or examine]</li>
-          <li>[Describe Part 2 — what students will diagnose or identify]</li>
-          <li>[Describe Part 3 — what students will rewrite or create]</li>
-          <li>[Describe Part 4 — what students will reflect on]</li>
-        </ol>
-        <p class="reminder-text"><em>[Optional: Add a key reminder or framing statement here. This appears as a highlighted callout.]</em></p>
-
-        <h3 class="sub-heading">[Reference List Heading — e.g., "Core Sections of a Campaign Brief"]</h3>
-        <ol class="brief-sections-list">
-          <li><strong>[Section 1 Name]:</strong> <em>[Description of what this section includes and what students should look for]</em></li>
-          <li><strong>[Section 2 Name]:</strong> <em>[Description of what this section includes and what students should look for]</em></li>
-          <li><strong>[Section 3 Name]:</strong> <em>[Description of what this section includes and what students should look for]</em></li>
-          <li><strong>[Section 4 Name]:</strong> <em>[Description of what this section includes and what students should look for]</em></li>
-          <li><strong>[Section 5 Name]:</strong> <em>[Description of what this section includes and what students should look for]</em></li>
-          <li><strong>[Section 6 Name]:</strong> <em>[Description of what this section includes and what students should look for]</em></li>
-          <li><strong>[Section 7 Name]:</strong> <em>[Description of what this section includes and what students should look for]</em></li>
-          <li><strong>[Section 8 Name]:</strong> <em>[Description of what this section includes and what students should look for]</em></li>
-          <li><strong>[Section 9 Name]:</strong> <em>[Description of what this section includes and what students should look for]</em></li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- PART 1: READ THE DOCUMENT -->
+    <!-- ── PART 1: SCENARIO ANALYSIS ──────────────────────────────── -->
     <section class="card part-card" id="sec-p1">
       <div class="card-header part1-header">
         <span class="part-badge">Part 1</span>
-        <h2>[Part 1 Title — e.g., "Read the Brief"]</h2>
+        <h2>Scenario Analysis</h2>
       </div>
       <div class="card-body">
-        <p class="card-intro">[Part 1 instructions — e.g., "Read the document below. Use the annotation tools to highlight, underline, or flag anything that seems problematic."]</p>
+        <p class="card-intro">Understanding the Problem — answer both questions. Go beyond surface-level observations and apply specific course concepts.</p>
 
-        <div class="ann-legend">
-          <span class="ann-legend-title">Select any text to annotate:</span>
-          <span class="ann-chip ann-chip-highlight">Highlight</span>
-          <span class="ann-chip ann-chip-underline">Underline</span>
-          <span class="ann-chip ann-chip-flag">Flag</span>
-          <button class="ann-clear-btn" id="btnClearAnnotations">Clear annotations</button>
+        <div class="reflection-item">
+          <div class="reflection-q">
+            <span class="q-num">1.</span> What is the core issue in this partnership?
+            <em class="q-constraint">(Be specific — go beyond "miscommunication")</em>
+          </div>
+          <textarea id="p1_core_issue" name="p1_core_issue"
+            placeholder="Identify the specific root problem — consider power dynamics, creative control, and professional expectations between brands and creators..."></textarea>
         </div>
 
-        <div class="neutrogena-brief" id="briefContent">
-          <div class="brief-title-bar">
-            <span>[DOCUMENT TITLE] (as received)</span>
+        <div class="reflection-item">
+          <div class="reflection-q">
+            <span class="q-num">2.</span> What factors contributed to this issue?
+            <em class="q-constraint">(Check all that apply, then explain below)</em>
           </div>
-          <div class="brief-meta">
-            <p><strong>[META LABEL 1 — e.g., "CLIENT"]:</strong> [Value — e.g., "Brand Name"]</p>
-            <p><strong>[META LABEL 2 — e.g., "CAMPAIGN"]:</strong> [Value — e.g., "Campaign Name"]</p>
+          <div class="checkbox-group" id="factorsGroup">
+            <label class="checkbox-item"><input type="checkbox" class="factor-cb" data-value="Poor communication" /> Poor communication</label>
+            <label class="checkbox-item"><input type="checkbox" class="factor-cb" data-value="Misaligned expectations" /> Misaligned expectations</label>
+            <label class="checkbox-item"><input type="checkbox" class="factor-cb" data-value="Over-control by the brand" /> Over-control by the brand</label>
+            <label class="checkbox-item"><input type="checkbox" class="factor-cb" data-value="Vague brief" /> Vague brief</label>
+            <label class="checkbox-item"><input type="checkbox" class="factor-cb" data-value="Timeline mismanagement" /> Timeline mismanagement</label>
+            <label class="checkbox-item"><input type="checkbox" class="factor-cb" data-value="Lack of trust" /> Lack of trust</label>
+            <label class="checkbox-item"><input type="checkbox" class="factor-cb" data-value="Other" /> Other</label>
           </div>
-          <div class="brief-divider"></div>
-
-          <div class="brief-section" id="bs-section1">
-            <h4 class="brief-section-label">[SECTION 1 NAME]</h4>
-            <p>[Paste the flawed content for Section 1 here. This is the document students read in Part 1 and diagnose in Part 2.]</p>
-          </div>
-
-          <div class="brief-section" id="bs-section2">
-            <h4 class="brief-section-label">[SECTION 2 NAME]</h4>
-            <p>[Paste the flawed content for Section 2 here.]</p>
-          </div>
-
-          <div class="brief-section" id="bs-section3">
-            <h4 class="brief-section-label">[SECTION 3 NAME]</h4>
-            <p>[Paste the flawed content for Section 3 here.]</p>
-          </div>
-
-          <div class="brief-section" id="bs-section4">
-            <h4 class="brief-section-label">[SECTION 4 NAME]</h4>
-            <p>[Paste the flawed content for Section 4 here.]</p>
-          </div>
-
-          <div class="brief-section" id="bs-section5">
-            <h4 class="brief-section-label">[SECTION 5 NAME]</h4>
-            <p>[Paste the flawed content for Section 5 here.]</p>
-          </div>
-
-          <div class="brief-section" id="bs-section6">
-            <h4 class="brief-section-label">[SECTION 6 NAME]</h4>
-            <p>[Paste the flawed content for Section 6 here.]</p>
-          </div>
-
-          <div class="brief-section" id="bs-section7">
-            <h4 class="brief-section-label">[SECTION 7 NAME]</h4>
-            <p>[Paste the flawed content for Section 7 here.]</p>
-          </div>
-
-          <div class="brief-section" id="bs-section8">
-            <h4 class="brief-section-label">[SECTION 8 NAME]</h4>
-            <p>[Paste the flawed content for Section 8 here.]</p>
-          </div>
-
+          <input type="hidden" id="p1_factors_checks" name="p1_factors_checks" />
+          <div class="rewrite-label" style="margin-top:10px; font-size:13px;">Explanation:</div>
+          <textarea id="p1_factors_explanation" name="p1_factors_explanation"
+            placeholder="Explain how the factors you selected contributed to the breakdown. Be specific and reference events from the scenario..."></textarea>
         </div>
-      </div>
 
-      <div class="part-footer">
-        <p class="continue-msg" id="msg-p1"></p>
-        <button class="btn-continue" id="btn-continue-p1">Continue to Part 2</button>
       </div>
     </section>
 
-    <!-- PART 2: DIAGNOSE THE PROBLEMS -->
-    <section class="card part-card part-locked" id="sec-p2">
+    <!-- ── PART 2: BREAKDOWN POINT ────────────────────────────────── -->
+    <section class="card part-card" id="sec-p2">
       <div class="card-header part2-header">
         <span class="part-badge">Part 2</span>
-        <h2>[Part 2 Title — e.g., "Fix the Problems"]</h2>
+        <h2>Breakdown Point</h2>
       </div>
       <div class="card-body">
-        <p class="card-intro">[Part 2 instructions — e.g., "For each section of the document, identify what is wrong and explain why it matters. Use specific concepts from class."]</p>
+        <p class="card-intro">Where It Failed — identify the specific moments and decisions that caused the relationship to deteriorate.</p>
 
-        <div class="p2-items">
-
-          <div class="p2-item">
-            <div class="p2-item-header">[Section 1 Name]</div>
-            <div class="brief-ref" id="ref-section1" data-source="bs-section1"></div>
-            <div class="p2-cols">
-              <div class="p2-col">
-                <label class="p2-col-label">[Left Column Question — e.g., "What is wrong with it?"]</label>
-                <textarea id="p2_section1_wrong" name="p2_section1_wrong" placeholder="[Left column placeholder text]"></textarea>
-              </div>
-              <div class="p2-col">
-                <label class="p2-col-label">[Right Column Question — e.g., "Why does it matter?"]</label>
-                <textarea id="p2_section1_why" name="p2_section1_why" placeholder="[Right column placeholder text]"></textarea>
-              </div>
-            </div>
+        <div class="reflection-item">
+          <div class="reflection-q">
+            <span class="q-num">3.</span> At what point did the relationship begin to break down?
+            <em class="q-constraint">(Identify the specific moment or decision)</em>
           </div>
-
-          <div class="p2-item">
-            <div class="p2-item-header">[Section 2 Name]</div>
-            <div class="brief-ref" id="ref-section2" data-source="bs-section2"></div>
-            <div class="p2-cols">
-              <div class="p2-col">
-                <label class="p2-col-label">[Left Column Question]</label>
-                <textarea id="p2_section2_wrong" name="p2_section2_wrong" placeholder="[Left column placeholder text]"></textarea>
-              </div>
-              <div class="p2-col">
-                <label class="p2-col-label">[Right Column Question]</label>
-                <textarea id="p2_section2_why" name="p2_section2_why" placeholder="[Right column placeholder text]"></textarea>
-              </div>
-            </div>
-          </div>
-
-          <div class="p2-item">
-            <div class="p2-item-header">[Section 3 Name]</div>
-            <div class="brief-ref" id="ref-section3" data-source="bs-section3"></div>
-            <div class="p2-cols">
-              <div class="p2-col">
-                <label class="p2-col-label">[Left Column Question]</label>
-                <textarea id="p2_section3_wrong" name="p2_section3_wrong" placeholder="[Left column placeholder text]"></textarea>
-              </div>
-              <div class="p2-col">
-                <label class="p2-col-label">[Right Column Question]</label>
-                <textarea id="p2_section3_why" name="p2_section3_why" placeholder="[Right column placeholder text]"></textarea>
-              </div>
-            </div>
-          </div>
-
-          <div class="p2-item">
-            <div class="p2-item-header">[Section 4 Name]</div>
-            <div class="brief-ref" id="ref-section4" data-source="bs-section4"></div>
-            <div class="p2-cols">
-              <div class="p2-col">
-                <label class="p2-col-label">[Left Column Question]</label>
-                <textarea id="p2_section4_wrong" name="p2_section4_wrong" placeholder="[Left column placeholder text]"></textarea>
-              </div>
-              <div class="p2-col">
-                <label class="p2-col-label">[Right Column Question]</label>
-                <textarea id="p2_section4_why" name="p2_section4_why" placeholder="[Right column placeholder text]"></textarea>
-              </div>
-            </div>
-          </div>
-
-          <div class="p2-item">
-            <div class="p2-item-header">[Section 5 Name]</div>
-            <div class="brief-ref" id="ref-section5" data-source="bs-section5"></div>
-            <div class="p2-cols">
-              <div class="p2-col">
-                <label class="p2-col-label">[Left Column Question]</label>
-                <textarea id="p2_section5_wrong" name="p2_section5_wrong" placeholder="[Left column placeholder text]"></textarea>
-              </div>
-              <div class="p2-col">
-                <label class="p2-col-label">[Right Column Question]</label>
-                <textarea id="p2_section5_why" name="p2_section5_why" placeholder="[Right column placeholder text]"></textarea>
-              </div>
-            </div>
-          </div>
-
-          <div class="p2-item">
-            <div class="p2-item-header">[Section 6 Name]</div>
-            <div class="brief-ref" id="ref-section6" data-source="bs-section6"></div>
-            <div class="p2-cols">
-              <div class="p2-col">
-                <label class="p2-col-label">[Left Column Question]</label>
-                <textarea id="p2_section6_wrong" name="p2_section6_wrong" placeholder="[Left column placeholder text]"></textarea>
-              </div>
-              <div class="p2-col">
-                <label class="p2-col-label">[Right Column Question]</label>
-                <textarea id="p2_section6_why" name="p2_section6_why" placeholder="[Right column placeholder text]"></textarea>
-              </div>
-            </div>
-          </div>
-
-          <div class="p2-item">
-            <div class="p2-item-header">[Section 7 Name]</div>
-            <div class="brief-ref" id="ref-section7" data-source="bs-section7"></div>
-            <div class="p2-cols">
-              <div class="p2-col">
-                <label class="p2-col-label">[Left Column Question]</label>
-                <textarea id="p2_section7_wrong" name="p2_section7_wrong" placeholder="[Left column placeholder text]"></textarea>
-              </div>
-              <div class="p2-col">
-                <label class="p2-col-label">[Right Column Question]</label>
-                <textarea id="p2_section7_why" name="p2_section7_why" placeholder="[Right column placeholder text]"></textarea>
-              </div>
-            </div>
-          </div>
-
-          <div class="p2-item">
-            <div class="p2-item-header">[Section 8 Name]</div>
-            <div class="brief-ref" id="ref-section8" data-source="bs-section8"></div>
-            <div class="p2-cols">
-              <div class="p2-col">
-                <label class="p2-col-label">[Left Column Question]</label>
-                <textarea id="p2_section8_wrong" name="p2_section8_wrong" placeholder="[Left column placeholder text]"></textarea>
-              </div>
-              <div class="p2-col">
-                <label class="p2-col-label">[Right Column Question]</label>
-                <textarea id="p2_section8_why" name="p2_section8_why" placeholder="[Right column placeholder text]"></textarea>
-              </div>
-            </div>
-          </div>
-
+          <textarea id="p2_breakdown_point" name="p2_breakdown_point"
+            placeholder="Point to a specific event in the scenario — what was the first moment the relationship shifted? Why was that the turning point?"></textarea>
         </div>
-      </div>
 
-      <div class="part-footer">
-        <p class="continue-msg" id="msg-p2"></p>
-        <button class="btn-continue" id="btn-continue-p2">Continue to Part 3</button>
+        <div class="reflection-item">
+          <div class="reflection-q">
+            <span class="q-num">4.</span> What warning signs (red flags) were present before the issue escalated?
+            <em class="q-constraint">(List at least 2–3)</em>
+          </div>
+          <textarea id="p2_red_flags" name="p2_red_flags"
+            placeholder="List at least 2-3 early warning signs from the scenario. What signals indicated this partnership was heading toward failure before it became public?"></textarea>
+        </div>
+
+        <div class="reflection-item">
+          <div class="reflection-q">
+            <span class="q-num">5.</span> Which party holds the most responsibility for the breakdown? Why?
+            <em class="q-constraint">(You may argue shared responsibility if justified)</em>
+          </div>
+          <textarea id="p2_responsibility" name="p2_responsibility"
+            placeholder="Assign responsibility clearly — the brand, the influencer, or both. Justify your position with specific evidence from the scenario..."></textarea>
+        </div>
+
       </div>
     </section>
 
-    <!-- PART 3: REWRITE / CREATE -->
-    <section class="card part-card part-locked" id="sec-p3">
+    <!-- ── PART 3: PR IMPACT ───────────────────────────────────────── -->
+    <section class="card part-card" id="sec-p3">
       <div class="card-header part3-header">
         <span class="part-badge">Part 3</span>
-        <h2>[Part 3 Title — e.g., "Rewrite the Brief"]</h2>
+        <h2>PR Impact</h2>
       </div>
       <div class="card-body">
-        <p class="card-intro">[Part 3 instructions — e.g., "Using the 9 core sections from class, rewrite this brief correctly. Be specific, professional, and realistic."]</p>
+        <p class="card-intro">Reputation Analysis — examine how this situation extends beyond the immediate conflict into broader reputational territory.</p>
 
-        <div class="brief-context-box">
-          <strong>[Context Label 1 — e.g., "Brand"]:</strong> [Value] &nbsp;|&nbsp;
-          <strong>[Context Label 2 — e.g., "Campaign"]:</strong> [Value] &nbsp;|&nbsp;
-          <strong>[Context Label 3 — e.g., "Platform(s)"]:</strong> [Value]
+        <div class="reflection-item">
+          <div class="reflection-q">
+            <span class="q-num">6.</span> How could this situation impact the brand's reputation?
+            <em class="q-constraint">(Think beyond this one influencer)</em>
+          </div>
+          <textarea id="p3_reputation" name="p3_reputation"
+            placeholder="Consider how the brand's reputation could be affected with other influencers, consumers, media, and the broader creator community..."></textarea>
         </div>
 
-        <div class="rewrite-sections">
-
-          <div class="rewrite-item">
-            <div class="rewrite-label">1. [Section 1 Name]</div>
-            <textarea id="p3_1" name="p3_1" placeholder="[Prompt for Section 1 — e.g., 'What is the campaign? What is being promoted? Why now?']"></textarea>
+        <div class="reflection-item">
+          <div class="reflection-q">
+            <span class="q-num">7.</span> How might audiences interpret this situation?
+            <em class="q-constraint">(Consider trust, authenticity, and brand perception)</em>
           </div>
-
-          <div class="rewrite-item">
-            <div class="rewrite-label">2. [Section 2 Name]</div>
-            <textarea id="p3_2" name="p3_2" placeholder="[Prompt for Section 2]"></textarea>
-          </div>
-
-          <div class="rewrite-item">
-            <div class="rewrite-label">3. [Section 3 Name]</div>
-            <textarea id="p3_3" name="p3_3" placeholder="[Prompt for Section 3]"></textarea>
-          </div>
-
-          <div class="rewrite-item">
-            <div class="rewrite-label">4. [Section 4 Name]</div>
-            <textarea id="p3_4" name="p3_4" placeholder="[Prompt for Section 4]"></textarea>
-          </div>
-
-          <div class="rewrite-item">
-            <div class="rewrite-label">5. [Section 5 Name]</div>
-            <textarea id="p3_5" name="p3_5" placeholder="[Prompt for Section 5]"></textarea>
-          </div>
-
-          <div class="rewrite-item">
-            <div class="rewrite-label">6. [Section 6 Name]</div>
-            <textarea id="p3_6" name="p3_6" placeholder="[Prompt for Section 6]"></textarea>
-          </div>
-
-          <div class="rewrite-item">
-            <div class="rewrite-label">7. [Section 7 Name]</div>
-            <textarea id="p3_7" name="p3_7" placeholder="[Prompt for Section 7]"></textarea>
-          </div>
-
-          <div class="rewrite-item">
-            <div class="rewrite-label">8. [Section 8 Name]</div>
-            <textarea id="p3_8" name="p3_8" placeholder="[Prompt for Section 8]"></textarea>
-          </div>
-
-          <div class="rewrite-item">
-            <div class="rewrite-label">9. [Section 9 Name]</div>
-            <textarea id="p3_9" name="p3_9" placeholder="[Prompt for Section 9]"></textarea>
-          </div>
-
+          <textarea id="p3_audience" name="p3_audience"
+            placeholder="How will the influencer's followers likely perceive this? What assumptions might they make about the brand? How does authenticity factor in?"></textarea>
         </div>
-      </div>
 
-      <div class="part-footer">
-        <p class="continue-msg" id="msg-p3"></p>
-        <button class="btn-continue" id="btn-continue-p3">Continue to Part 4</button>
+        <div class="reflection-item">
+          <div class="reflection-q">
+            <span class="q-num">8.</span> Why is this no longer just an operational issue, but a PR issue?
+          </div>
+          <textarea id="p3_pr_issue" name="p3_pr_issue"
+            placeholder="Explain the transition from a behind-the-scenes contract dispute to a public reputation problem. What made it cross that threshold?"></textarea>
+        </div>
+
       </div>
     </section>
 
-    <!-- PART 4: REFLECTION -->
-    <section class="card part-card part-locked" id="sec-p4">
+    <!-- ── PART 4: FIX STRATEGY ───────────────────────────────────── -->
+    <section class="card part-card" id="sec-p4">
       <div class="card-header part4-header">
         <span class="part-badge">Part 4</span>
-        <h2>Reflection Questions</h2>
+        <h2>Fix Strategy</h2>
       </div>
       <div class="card-body">
-        <p class="card-intro">Answer the following in complete sentences.</p>
+        <p class="card-intro">PR Response &amp; Prevention — propose both an immediate response to the current situation and long-term changes to prevent future failures.</p>
+
+        <h3 class="sub-heading" style="margin-top:0; border-top:none; padding-top:0;">Immediate Response (Short-Term)</h3>
 
         <div class="reflection-item">
           <div class="reflection-q">
-            <span class="q-num">1.</span>
-            [Reflection Question 1 — Replace with your specific question]
+            <span class="q-num">9.</span> What should the brand do immediately to address the situation?
+            <em class="q-constraint">(List at least 2 actions)</em>
           </div>
-          <textarea id="p4_1" name="p4_1" placeholder="Answer in complete sentences..."></textarea>
+          <textarea id="p4_immediate" name="p4_immediate"
+            placeholder="List at least 2 concrete immediate actions the brand should take now. Be specific — who does what, and how?"></textarea>
         </div>
 
         <div class="reflection-item">
           <div class="reflection-q">
-            <span class="q-num">2.</span>
-            [Reflection Question 2 — Replace with your specific question]
+            <span class="q-num">10.</span> How should the brand communicate with the influencer moving forward?
           </div>
-          <textarea id="p4_2" name="p4_2" placeholder="Answer in complete sentences..."></textarea>
+          <textarea id="p4_communication" name="p4_communication"
+            placeholder="What tone, channel, and approach should the brand use? What should be said, and what should be avoided?"></textarea>
+        </div>
+
+        <h3 class="sub-heading">Long-Term Strategy (Prevention)</h3>
+
+        <div class="reflection-item">
+          <div class="reflection-q">
+            <span class="q-num">11.</span> What changes should the brand make to prevent this from happening again?
+            <em class="q-constraint">(Consider process, communication, and relationship management)</em>
+          </div>
+          <textarea id="p4_prevention" name="p4_prevention"
+            placeholder="Think about structural changes: briefing processes, approval timelines, creative freedom agreements, and relationship-building practices..."></textarea>
         </div>
 
         <div class="reflection-item">
           <div class="reflection-q">
-            <span class="q-num">3.</span>
-            [Reflection Question 3 — Replace with your specific question]
+            <span class="q-num">12.</span> How could better relationship management have prevented this issue?
+            <em class="q-constraint">(Use course concepts)</em>
           </div>
-          <textarea id="p4_3" name="p4_3" placeholder="Answer in complete sentences..."></textarea>
-        </div>
-
-        <div class="reflection-item">
-          <div class="reflection-q">
-            <span class="q-num">4.</span>
-            [Reflection Question 4 — Replace with your specific question]
-          </div>
-          <textarea id="p4_4" name="p4_4" placeholder="Answer in complete sentences..."></textarea>
+          <textarea id="p4_relationship" name="p4_relationship"
+            placeholder="Apply relationship management concepts from class — trust, mutual benefit, proactive communication, and co-creation. How do these apply here?"></textarea>
         </div>
 
       </div>
-
     </section>
 
-    <!-- DOWNLOAD & SUBMIT -->
-    <section class="submit-section part-locked" id="sec-submit">
+    <!-- ── PART 5: REFLECTION ─────────────────────────────────────── -->
+    <section class="card part-card" id="sec-p5">
+      <div class="card-header part5-header">
+        <span class="part-badge">Part 5</span>
+        <h2>Reflection</h2>
+      </div>
+      <div class="card-body">
+        <p class="card-intro">Critical Thinking — step back from the scenario and draw broader lessons about influencer relations and PR practice.</p>
+
+        <div class="reflection-item">
+          <div class="reflection-q">
+            <span class="q-num">13.</span> What is one key takeaway from this scenario about influencer relations and PR?
+          </div>
+          <textarea id="p5_takeaway" name="p5_takeaway"
+            placeholder="State your most important insight from this case. What lesson applies beyond this specific situation?"></textarea>
+        </div>
+
+        <div class="reflection-item">
+          <div class="reflection-q">
+            <span class="q-num">14.</span> In your opinion, what matters more in influencer partnerships: control or trust? Why?
+          </div>
+          <textarea id="p5_opinion" name="p5_opinion"
+            placeholder="Take a clear position — control or trust — and defend it. Use this scenario as evidence for your argument..."></textarea>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── DOWNLOAD & SUBMIT ──────────────────────────────────────── -->
+    <section class="submit-section" id="sec-submit">
       <div class="submit-inner">
         <div class="submit-icon">⬇</div>
-        <h2>Download PDF</h2>
-        <p>When you're finished, click the button below to download a PDF of your completed worksheet. Then <strong>upload the PDF to the [ACTIVITY NAME] assignment on Canvas</strong>.</p>
+        <h2>Download Group Worksheet (PDF)</h2>
+        <p>When your group is finished, click below to download a timestamped PDF. <strong>Submit one PDF per group.</strong></p>
 
         <button class="btn-download" id="btnDownload">
-          Download My Worksheet (PDF)
+          Download Group Worksheet (PDF)
         </button>
 
         <div class="btn-clear-wrap">
@@ -447,9 +390,16 @@
 
         <div class="validation-msg" id="validationMsg"></div>
 
+        <div class="gdrive-reminder">
+          <div class="gdrive-reminder-title">📁 Upload to Google Drive</div>
+          <p>After downloading, upload the PDF to your group folder:</p>
+          <div class="gdrive-path">Google Drive &rarr; Your Group Folder &rarr; <strong>Worksheet Packet</strong></div>
+          <p style="font-size:12px; opacity:0.8;">One submission per group. Make sure all group members have access to the shared folder.</p>
+        </div>
+
         <div class="submit-save-note">
-          <p><strong>Your progress is saved automatically in your browser. You can return to finish later, even if you close this tab.</strong></p>
-          <p class="submit-warning">This has not been fully tested. Do not trust that this will save your work. Keep the browser tab open just to be safe.</p>
+          <p><strong>All answers are saved automatically and synced across your group in real time.</strong></p>
+          <p class="submit-warning">Avoid closing the tab mid-session — if you lose connection, your last saved answers will reload when you rejoin with the same group code.</p>
         </div>
       </div>
     </section>
@@ -457,27 +407,12 @@
   </main>
 
   <footer class="site-footer">
-    <p>[COURSE NUMBER]: [COURSE NAME] | San José State University</p>
+    <p>PR 190: Media &amp; Influencer Relations &nbsp;|&nbsp; San José State University &nbsp;|&nbsp; Week 14 Activity</p>
   </footer>
 
-  <!-- Annotation toolbar -->
-  <div class="ann-toolbar" id="annToolbar" role="toolbar" aria-label="Annotation tools">
-    <button class="ann-btn" data-type="highlight" title="Highlight">
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="1" y="9" width="14" height="5" rx="1.5" fill="#F6C90E"/><rect x="4" y="2" width="8" height="9" rx="1" fill="currentColor" opacity=".7"/></svg>
-      Highlight
-    </button>
-    <div class="ann-toolbar-sep"></div>
-    <button class="ann-btn" data-type="underline" title="Underline">
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><text x="2" y="12" font-size="13" font-weight="bold" font-family="serif" fill="currentColor">U</text><rect x="1" y="13.5" width="14" height="1.5" rx="1" fill="currentColor"/></svg>
-      Underline
-    </button>
-    <div class="ann-toolbar-sep"></div>
-    <button class="ann-btn" data-type="flag" title="Flag">
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 1v14M3 1h9l-2.5 4L12 9H3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Flag
-    </button>
-  </div>
-
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- jsPDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="script.js"></script>
 </body>
