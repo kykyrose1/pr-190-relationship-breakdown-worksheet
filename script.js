@@ -5,7 +5,7 @@
 
 // ── GOOGLE SHEETS WEBHOOK ────────────────────────────────────────
 // Paste your deployed Apps Script Web App URL here after setup
-const SHEETS_WEBHOOK_URL = '';
+const SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbz3OTOfpLxpEIVAhWtDDBoGlkIPgQzkSBWDuyhlnCKZgCDmLGIDaI1FzsbgpmZ-CfJBaA/exec';
 
 // ── SUPABASE CONFIG ─────────────────────────────────────────────
 const SUPABASE_URL = 'https://tfltgoufgimhhkeuvtgp.supabase.co';
